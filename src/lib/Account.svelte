@@ -1,12 +1,12 @@
 <script lang="ts">
 	import {
-	disconnect,
-	fetchEnsAvatar,
-	fetchEnsName,
-	getAccount,
-	watchAccount,
-	type FetchEnsAvatarResult,
-	type FetchEnsNameResult
+		disconnect,
+		fetchEnsAvatar,
+		fetchEnsName,
+		getAccount,
+		watchAccount,
+		type FetchEnsAvatarResult,
+		type FetchEnsNameResult,
 	} from '@wagmi/core';
 	import { onMount } from 'svelte';
 
@@ -18,15 +18,13 @@
 		});
 		return () => {
 			unwatchAccount();
-		}
+		};
 	});
 
 	let ensName: FetchEnsNameResult = null;
 	$: {
 		(async () => {
-			console.log('fetching ens name', accountData.address);
 			ensName = await fetchEnsName({ address: accountData.address ?? '' });
-			console.log(JSON.stringify({ensName}, null, 2));
 		})();
 	}
 
@@ -41,7 +39,7 @@
 	}
 </script>
 
-{#if ensName}
+{#if accountData}
 	<div>
 		<div>
 			<button on:click={disconnect}>

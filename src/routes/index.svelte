@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Account from '$lib/Account.svelte';
 	import Connect from '$lib/Connect.svelte';
-	import { getAccount,watchAccount } from '@wagmi/core';
+	import NetworkSwitcher from '$lib/NetworkSwitcher.svelte';
+	import { getAccount, watchAccount } from '@wagmi/core';
 	import { onMount } from 'svelte';
 
 	let accountData = getAccount();
@@ -15,8 +16,8 @@
 </script>
 
 {#if accountData?.address}
-{accountData?.address}
 	<Account />
+	<NetworkSwitcher />
 {:else}
 	<Connect />
 {/if}
