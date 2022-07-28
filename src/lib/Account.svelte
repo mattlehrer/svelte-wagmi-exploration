@@ -1,29 +1,33 @@
 <script lang="ts">
 	import {
-		disconnect,
-		fetchEnsAvatar,
-		fetchEnsName,
-		getAccount,
-		watchAccount,
-		type FetchEnsAvatarResult,
-		type FetchEnsNameResult,
+	disconnect,
+	fetchEnsAvatar,
+	fetchEnsName,
+	getAccount,
+	watchAccount,
+	type FetchEnsAvatarResult,
+	type FetchEnsNameResult
 	} from '@wagmi/core';
 	import { onMount } from 'svelte';
 
 	let accountData = getAccount();
 
 	onMount(() => {
-		const unwatch = watchAccount((data) => {
+		const unwatchAccount = watchAccount((data) => {
 			accountData = data;
 		});
-		return () => unwatch;
+		return () => {
+			unwatchAccount();
+		}
 	});
 
 	let ensName: FetchEnsNameResult = null;
 	$: {
-		async () => {
-			if (accountData?.address) ensName = await fetchEnsName({ address: accountData.address });
-		};
+		(async () => {
+			console.log('fetching ens name', accountData.address);
+			ensName = await fetchEnsName({ address: accountData.address ?? '' });
+			console.log(JSON.stringify({ensName}, null, 2));
+		})();
 	}
 
 	let ensAvatar: FetchEnsAvatarResult | undefined;
