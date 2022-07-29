@@ -47,10 +47,10 @@
 			</button>
 		</div>
 		<div>{accountData?.address}</div>
-		<div>
-			{ensName ?? accountData?.address}
-			{ensName ? ` (${accountData?.address})` : null}
-		</div>
+
+		{#if ensName}
+			<div>{ensName}</div>
+		{/if}
 
 		{#if ensAvatar}
 			<img src={ensAvatar} style="height: 40; width: 40" alt="" />
