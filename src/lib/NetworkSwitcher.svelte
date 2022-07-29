@@ -1,10 +1,10 @@
 <script lang="ts">
 	import {
-	getNetwork,
-	SwitchChainError,
-	switchNetwork,
-	watchNetwork,
-	type Chain
+		getNetwork,
+		SwitchChainError,
+		switchNetwork,
+		watchNetwork,
+		type Chain,
 	} from '@wagmi/core';
 	import { onMount } from 'svelte';
 
@@ -41,7 +41,7 @@
 	</div>
 
 	{#each networkData.chains as chain}
-		{#if chain.id === networkData.chain?.id}
+		{#if chain.id !== networkData.chain?.id}
 			<button class="m-2" on:click={() => handleSwitchNetwork(chain.id)}>
 				Switch to {chain.name}
 			</button>
