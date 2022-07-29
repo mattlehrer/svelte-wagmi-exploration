@@ -1,6 +1,6 @@
 import { chain, Connector, createClient, defaultChains, InjectedConnector } from '@wagmi/core';
-// import { CoinbaseWalletConnector } from '@wagmi/core/connectors/coinbaseWallet';
-// import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect';
+import { CoinbaseWalletConnector } from '@wagmi/core/connectors/coinbaseWallet';
+import { WalletConnectConnector } from '@wagmi/core/connectors/walletConnect';
 import { providers } from 'ethers';
 
 // Get environment variables
@@ -14,23 +14,23 @@ const defaultChain = chain.mainnet;
 
 // Set up connectors
 const connectors = () => {
-	// const rpcUrl = chain.mainnet.rpcUrls[0] ?? defaultChain.rpcUrls[0];
+	const rpcUrl = chain.mainnet.rpcUrls[0] ?? defaultChain.rpcUrls[0];
 	return [
 		new InjectedConnector({ chains, options: { shimDisconnect: true } }),
-		// new WalletConnectConnector({
-		// 	chains,
-		// 	options: {
-		// 		infuraId,
-		// 		qrcode: true,
-		// 	},
-		// }),
-		// new CoinbaseWalletConnector({
-		// 	chains,
-		// 	options: {
-		// 		appName: 'wagmi',
-		// 		jsonRpcUrl: `${rpcUrl}/${infuraId}`,
-		// 	},
-		// }),
+		new WalletConnectConnector({
+			chains,
+			options: {
+				infuraId,
+				qrcode: true,
+			},
+		}),
+		new CoinbaseWalletConnector({
+			chains,
+			options: {
+				appName: 'wagmi',
+				jsonRpcUrl: `${rpcUrl}/${infuraId}`,
+			},
+		}),
 	];
 };
 

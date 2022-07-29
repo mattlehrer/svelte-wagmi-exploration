@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { wagmiClient } from '$lib/wagmi';
-	import type { Connector } from '@wagmi/core';
-	import { connect } from '@wagmi/core';
+	import { connect, type Connector } from '@wagmi/core';
 	import { onMount } from 'svelte';
 
 	type State = {
