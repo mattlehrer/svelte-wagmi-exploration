@@ -42,7 +42,7 @@
 
 	{#each networkData.chains as chain}
 		{#if chain.id === networkData.chain?.id}
-			<button on:click={() => handleSwitchNetwork(chain.id)}>
+			<button class="m-2" on:click={() => handleSwitchNetwork(chain.id)}>
 				Switch to {chain.name}
 			</button>
 		{/if}
